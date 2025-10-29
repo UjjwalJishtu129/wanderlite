@@ -1,0 +1,89 @@
+<% layout('layout') -%>
+
+<div class="container" style="max-width: 560px;">
+  <div class="card auth-card shadow-sm border-0 rounded-4 mt-3">
+    <div class="card-body p-4 p-md-5">
+      <!-- Centered icon -->
+      <div class="text-center mb-4">
+        <div class="auth-avatar mb-3 mx-auto">
+          <i class="bi bi-person-plus"></i>
+        </div>
+        <h3 class="fw-semibold mb-1">Create your account</h3>
+        <p class="text-muted mb-0 small">Join the community — it’s fast and free</p>
+      </div>
+
+      <form action="/register" method="POST" class="form-compact">
+        <div class="row g-3">
+          <!-- Username -->
+          <div class="col-12">
+            <label class="form-label">Username</label>
+            <input
+              class="form-control"
+              name="username"
+              value="<%= (typeof sticky !== 'undefined' && sticky && sticky.username) ? sticky.username : '' %>"
+              required
+            >
+          </div>
+
+          <!-- Email -->
+          <div class="col-12">
+            <label class="form-label">Email</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input
+                class="form-control"
+                type="email"
+                name="email"
+                value="<%= (typeof sticky !== 'undefined' && sticky && sticky.email) ? sticky.email : '' %>"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input class="form-control" type="password" name="password" minlength="6" required>
+            </div>
+            <small class="text-muted">Min 6 characters</small>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Confirm Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-shield-check"></i></span>
+              <input class="form-control" type="password" name="passwordConfirm" minlength="6" required>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="terms" required>
+              <label class="form-check-label" for="terms">
+                I agree to the <a href="#" class="text-decoration-none">Terms</a> &amp; <a href="#" class="text-decoration-none">Privacy</a>
+              </label>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="col-12 d-grid gap-2 mt-2">
+            <button class="btn btn-brand btn-icon"><i class="bi bi-check2-circle"></i> Sign Up</button>
+            <a class="btn btn-light border btn-icon" href="/login"><i class="bi bi-box-arrow-in-right"></i> Already have an account?</a>
+            <a class="btn btn-outline-secondary btn-icon" href="/listings"><i class="bi bi-compass"></i> Explore listings</a>
+          </div>
+        </div>
+      </form>
+
+      <% /* Optional: show flash error nicely if you use res.locals.error */ %>
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger mt-3"><%= error %></div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+

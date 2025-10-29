@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+
+<div class="container py-5 text-center">
+  <h2 class="mb-3 text-danger">Something went wrong</h2>
+
+  <div class="alert alert-danger mx-auto" style="max-width:600px;">
+    <strong><%= err && err.message ? err.message : 'Unexpected server error' %></strong>
+  </div>
+
+  <% if (err && err.statusCode) { %>
+    <p class="text-muted mb-3">Status: <%= err.statusCode %></p>
+  <% } %>
+
+  <% if (process.env.NODE_ENV !== 'production') { %>
+    <details open class="mt-3 text-start mx-auto" style="max-width:700px;">
+      <summary class="fw-semibold mb-2">Debug details (dev only)</summary>
+      <pre class="p-3 bg-light border rounded small"><%- (err && err.stack) ? err.stack : '' %></pre>
+    </details>
+  <% } %>
+
+  <a class="btn btn-dark mt-4" href="/">Go Home</a>
+</div>

@@ -1,0 +1,65 @@
+<% layout('layout') -%>
+
+<h2 class="mb-3">Edit: <%= listing.title %></h2>
+
+<form action="/listings/<%= listing._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="card form-card">
+  <div class="card-header"><strong>Details</strong></div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Title</label>
+        <input class="form-control" name="listing[title]" value="<%= listing.title %>" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Price</label>
+        <input class="form-control" type="number" min="0" name="listing[price]" value="<%= listing.price %>" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Location</label>
+        <input class="form-control" name="listing[location]" value="<%= listing.location %>" required>
+        <div class="form-help">Changing this will update the map automatically.</div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="listing[description]" rows="3"><%= listing.description %></textarea>
+      </div>
+
+      <!-- Current images with delete toggles -->
+      <div class="col-12">
+        <label class="form-label">Current Images</label>
+        <% if (gallery && gallery.length) { %>
+          <div class="row g-2">
+            <% gallery.forEach(function(img){ %>
+              <div class="col-6 col-md-3">
+                <div class="border rounded p-2 h-100">
+                  <img src="<%= img.url %>" class="img-fluid rounded mb-2" alt="">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="deleteImages" value="<%= img.filename %>" id="del-<%= img.filename %>">
+                    <label class="form-check-label small" for="del-<%= img.filename %>">Delete</label>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p class="text-muted">No images yet.</p>
+        <% } %>
+      </div>
+
+      <!-- Add more images -->
+      <div class="col-md-6">
+        <label class="form-label">Add Images</label>
+        <input class="form-control" type="file" name="images" multiple accept=".jpg,.jpeg,.png,.webp">
+      </div>
+    </div>
+
+    <button class="btn btn-dark mt-3"><i class="bi bi-save"></i> Save Changes</button>
+    <a class="btn btn-light border mt-3" href="/listings/<%= listing._id %>">Cancel</a>
+  </div>
+</form>
+
+
+
+
+
+

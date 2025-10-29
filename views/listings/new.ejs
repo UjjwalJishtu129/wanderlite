@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+
+<h2 class="mb-3">New Listing</h2>
+
+<form action="/listings" method="POST" enctype="multipart/form-data" class="card form-card">
+  <div class="card-header"><strong>Details</strong></div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Title</label>
+        <input class="form-control" name="listing[title]" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Price</label>
+        <input class="form-control" type="number" min="0" name="listing[price]" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Location</label>
+        <input class="form-control" name="listing[location]" placeholder="City, Country" required>
+        <div class="form-help">We’ll place it on the map automatically.</div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" name="listing[description]" rows="3"></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Images (you can select multiple)</label>
+        <input class="form-control" type="file" name="images" multiple accept=".jpg,.jpeg,.png,.webp">
+        <div class="form-help">JPG, PNG, WEBP — up to 8 files.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-brand mt-3"><i class="bi bi-plus-circle"></i> Create</button>
+  </div>
+</form>
+
+
+
+
+

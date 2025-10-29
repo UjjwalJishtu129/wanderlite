@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 brand-link" href="/">
+      <span class="logo-pill d-inline-flex align-items-center justify-content-center">
+        <i class="bi bi-compass"></i>
+      </span>
+      <span class="brand-word">Wanderlite</span>
+    </a>
+
+    <ul class="navbar-nav ms-auto flex-row gap-3">
+      <li class="nav-item"><a class="nav-link" href="/listings">Listings</a></li>
+      <% if (!currentUser) { %>
+        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+      <% } else { %>
+        <li class="nav-item"><a class="nav-link" href="/listings/new">New Listing</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+
+
+
+

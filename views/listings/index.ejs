@@ -1,0 +1,88 @@
+<% layout('layout') -%>
+
+<h2 class="mb-3">All Listings</h2>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <form class="filter-row" action="/listings" method="GET">
+    <div class="search-wrap">
+      <input class="form-control" type="text" name="q" placeholder="Search by title or location" value="<%= q || '' %>">
+    </div>
+
+    <div class="price-wrap">
+      <span class="text-muted small">Min</span>
+      <input class="form-control" type="number" name="min" min="0"
+             value="<%= (typeof min !== 'undefined' && min !== null && min !== '') ? min : '' %>">
+      <span class="text-muted small">Max</span>
+      <input class="form-control" type="number" name="max" min="0"
+             value="<%= (typeof max !== 'undefined' && max !== null && max !== '') ? max : '' %>">
+    </div>
+
+    <div class="sort-wrap">
+      <select class="form-select" name="sort">
+        <option value="newest" <%= sort==='newest' ? 'selected' : '' %>>Newest</option>
+        <option value="oldest" <%= sort==='oldest' ? 'selected' : '' %>>Oldest</option>
+        <option value="price_asc" <%= sort==='price_asc' ? 'selected' : '' %>>Price: Low to High</option>
+        <option value="price_desc" <%= sort==='price_desc' ? 'selected' : '' %>>Price: High to Low</option>
+      </select>
+    </div>
+
+    <div class="actions-wrap">
+      <button class="btn btn-brand btn-icon" type="submit"><i class="bi bi-funnel"></i> Apply</button>
+      <% if (currentUser) { %>
+        <a class="btn btn-dark btn-icon" href="/listings/new"><i class="bi bi-plus-circle"></i> New</a>
+      <% } %>
+    </div>
+  </form>
+</div>
+
+<!-- Results -->
+<% if (listings && listings.length) { %>
+  <div class="listings-grid">
+    <% listings.forEach(function(l){ %>
+      <div class="listing-card">
+        <a href="/listings/<%= l._id %>">
+          <img class="listing-thumb" src="<%= (l.images && l.images[0]) ? l.images[0].url : '/fallback-hero.svg' %>" alt="">
+        </a>
+        <div class="listing-body">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div class="price-badge">$<%= l.price %></div>
+            <span class="small text-muted"><%= new Date(l.createdAt).toLocaleDateString() %></span>
+          </div>
+          <div class="fw-semibold"><a class="text-decoration-none" href="/listings/<%= l._id %>"><%= l.title %></a></div>
+          <div class="meta"><i class="bi bi-geo-alt"></i> <%= l.location %></div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <div class="empty-state border-soft rounded-4 p-5 my-4 text-center">
+    <div class="empty-icon mb-2"><i class="bi bi-search"></i></div>
+    <div class="fs-5 fw-semibold mb-1">No results found</div>
+    <div class="text-muted mb-3">Try adjusting your search or clearing filters.</div>
+    <a class="btn btn-outline-secondary btn-icon" href="/listings"><i class="bi bi-arrow-counterclockwise"></i> Reset Filters</a>
+  </div>
+<% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
